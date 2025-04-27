@@ -47,7 +47,8 @@ function App() {
         onAmountChange={e => {
           setFromAmount(e.target.value);
           setToAmount(parseFloat(e.target.value * exchangeRate).toFixed(3)); //這行可以考慮拆到另一個 useEffect，並監聽 fromAmount
-        }} />
+        }}
+      />
 
       <div className="middle">
         <button className="swapButton" onClick={swapCurrencies} title='切換貨幣'>
@@ -67,7 +68,11 @@ function App() {
         amount={toAmount}
         onAmountChange={e => {
           setToAmount(e.target.value);
-        }} />
+        }}
+        readOnly
+      />
+
+      <footer>UI inspired by <a href="https://codepen.io/FlorinPop17/pen/oNNYWxK" target="_blank" rel="noreferrer">this CodePen project</a>.</footer>
     </>
   );
 }
