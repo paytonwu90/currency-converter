@@ -7,10 +7,10 @@ import CurrencyInput from './components/CurrencyInput';
 function App() {
   const [fromAmount, setFromAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState('JPY');
-  const [toAmount, setToAmount] = useState(0);
   const [toCurrency, setToCurrency] = useState('TWD');
   const [exchangeRate, setExchangeRate] = useState(0);
   
+  const toAmount = parseFloat(fromAmount * exchangeRate).toFixed(3)
 
   useEffect(() => {
     async function getData() {
@@ -19,9 +19,8 @@ function App() {
         const res = await axios.get(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
         const rate = res.data.rates[toCurrency];
         setExchangeRate(rate);
-        setToAmount(parseFloat(fromAmount * rate).toFixed(3));
       } catch (error) {
-        console.error('fetch error:', err);
+        console.error('fetch error:', error);
       }
     }
 
@@ -46,7 +45,6 @@ function App() {
         amount={fromAmount}
         onAmountChange={e => {
           setFromAmount(e.target.value);
-          setToAmount(parseFloat(e.target.value * exchangeRate).toFixed(3)); //這行可以考慮拆到另一個 useEffect，並監聽 fromAmount
         }}
       />
 
@@ -66,9 +64,7 @@ function App() {
         value={toCurrency}
         onCurrencyChange={e => setToCurrency(e.target.value)}
         amount={toAmount}
-        onAmountChange={e => {
-          setToAmount(e.target.value);
-        }}
+        onAmountChange={() => {}}
         readOnly
       />
 
