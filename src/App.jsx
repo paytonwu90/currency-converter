@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
-import './App.css'
-import CurrencyInput from './components/CurrencyInput';
-
 
 function App() {
   const [fromAmount, setFromAmount] = useState(1);
@@ -36,17 +33,24 @@ function App() {
 
   return (
     <>
-      <h1>Currency Converter</h1>
-      <CurrencyInput
-        name="fromCurrency"
-        id="fromCurrency"
-        value={fromCurrency}
-        onCurrencyChange={e => setFromCurrency(e.target.value)}
-        amount={fromAmount}
-        onAmountChange={e => {
-          setFromAmount(e.target.value);
-        }}
-      />
+      <h1 className="lg:text-4xl font-bold text-center">Currency Converter</h1>
+      <div className="currencyInput">
+        <select name="fromCurrency" id="fromCurrency" value={fromCurrency} onChange={e => setFromCurrency(e.target.value)}>
+          <option value="JPY">JPY</option>
+          <option value="TWD">TWD</option>
+        </select>
+        <input 
+          type="number" 
+          value={fromAmount} 
+          onChange={e => setFromAmount(e.target.value)}
+          onClick={e => {
+            // 檢測是否為手機版
+            if (window.innerWidth <= 768) {
+              e.target.select();
+            }
+          }}
+        />
+      </div>
 
       <div className="middle">
         <button className="swapButton" onClick={swapCurrencies} title='切換貨幣'>
@@ -58,17 +62,28 @@ function App() {
         <div className="exchangeRate">1 {fromCurrency} = {exchangeRate} {toCurrency}</div>
       </div>
 
-      <CurrencyInput
-        name="toCurrency"
-        id="toCurrency"
-        value={toCurrency}
-        onCurrencyChange={e => setToCurrency(e.target.value)}
-        amount={toAmount}
-        onAmountChange={() => {}}
-        readOnly
-      />
+      <div className="currencyInput">
+        <select name="toCurrency" id="toCurrency" value={toCurrency} onChange={e => setToCurrency(e.target.value)}>
+          <option value="JPY">JPY</option>
+          <option value="TWD">TWD</option>
+        </select>
+        <input 
+          type="text" 
+          value={toAmount}
+          readOnly 
+        />
+      </div>
 
-      <footer>UI inspired by <a href="https://codepen.io/FlorinPop17/pen/oNNYWxK" target="_blank" rel="noreferrer">this CodePen project</a>.</footer>
+      <footer className="absolute bottom-0 right-0 text-sm text-[#5f5f5f]">
+        UI inspired by{' '}
+        <a 
+          href="https://codepen.io/FlorinPop17/pen/oNNYWxK" 
+          target="_blank" 
+          rel="noreferrer"
+        >
+          this CodePen project
+        </a>.
+      </footer>
     </>
   );
 }
