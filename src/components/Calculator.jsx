@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { calculate } from '../utils/calculator';
 
 function Calculator({ initialValue, onConfirm, onClose }) {
   const [currentValue, setCurrentValue] = useState(initialValue || '0');
@@ -73,21 +74,6 @@ function Calculator({ initialValue, onConfirm, onClose }) {
 
     setWaitingForNewValue(true);
     setOperation(nextOperation);
-  };
-
-  const calculate = (firstValue, secondValue, operation) => {
-    switch (operation) {
-      case '+':
-        return firstValue + secondValue;
-      case '-':
-        return firstValue - secondValue;
-      case '*':
-        return firstValue * secondValue;
-      case '/':
-        return secondValue !== 0 ? firstValue / secondValue : 0;
-      default:
-        return secondValue;
-    }
   };
 
   const handleEquals = () => {
