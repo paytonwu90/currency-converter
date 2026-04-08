@@ -14,4 +14,9 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: true, // 讓手機也能訪問
   },
+  test: {
+    globals: true,           // 讓 describe, it, expect 變成全域，不用每個檔案 import
+    environment: 'jsdom',    // 強制使用 jsdom 模擬瀏覽器
+    setupFiles: './src/test/setup.js', // 測試啟動前的初始化檔案
+  },
 }))

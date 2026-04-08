@@ -58,6 +58,7 @@ function App() {
         <input 
           type="number" 
           value={fromAmount} 
+          aria-label="From Amount"
           onChange={e => setFromAmount(e.target.value)}
           onClick={e => {
             // 檢測是否為手機版
@@ -102,6 +103,7 @@ function App() {
         <input 
           type="text" 
           value={toAmount}
+          aria-label="To Amount"
           readOnly 
         />
       </div>

@@ -106,7 +106,10 @@ function Calculator({ initialValue, onConfirm, onClose }) {
   return (
     <div className="calculator">
       <div className="mb-4">
-        <div className="bg-gray-100 p-4 rounded text-right text-2xl font-mono min-h-[60px] flex items-center justify-end">
+        <div
+          data-testid="calculator-display"
+          className="bg-gray-100 p-4 rounded text-right text-2xl font-mono min-h-[60px] flex items-center justify-end"
+        >
           {expression || currentValue}
         </div>
       </div>
